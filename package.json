@@ -35,7 +35,6 @@
   "dependencies": {
     "domhandler": "2.3",
     "domutils": "1.5",
-    "domelementtype": "1",
     "entities": "1.0"
   },
   "devDependencies": {

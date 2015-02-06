@@ -1,4 +1,4 @@
-#htmlparser2
+# htmlparser2
 
 [![NPM version](http://img.shields.io/npm/v/htmlparser2.svg?style=flat)](https://npmjs.org/package/htmlparser2)
 [![Downloads](https://img.shields.io/npm/dm/htmlparser2.svg?style=flat)](https://npmjs.org/package/htmlparser2)
@@ -7,29 +7,30 @@
 
 A forgiving HTML/XML/RSS parser written in JS for NodeJS. The parser can handle streams (chunked data) and supports custom handlers for writing custom DOMs/output.
 
-##Installing
-	npm install htmlparser2
-	
+## Installing
+
+    npm install htmlparser2
+
 A live demo of htmlparser2 is available at http://demos.forbeslindesay.co.uk/htmlparser2/
 
-##Usage
+## Usage
 
 ```javascript
 var htmlparser = require("htmlparser2");
 var parser = new htmlparser.Parser({
-	onopentag: function(name, attribs){
-		if(name === "script" && attribs.type === "text/javascript"){
-			console.log("JS! Hooray!");
-		}
-	},
-	ontext: function(text){
-		console.log("-->", text);
-	},
-	onclosetag: function(tagname){
-		if(tagname === "script"){
-			console.log("That's it?!");
-		}
-	}
+    onopentag: function(name, attribs){
+        if(name === "script" && attribs.type === "text/javascript"){
+            console.log("JS! Hooray!");
+        }
+    },
+    ontext: function(text){
+        console.log("-->", text);
+    },
+    onclosetag: function(tagname){
+        if(tagname === "script"){
+            console.log("That's it?!");
+        }
+    }
 }, {decodeEntities: true});
 parser.write("Xyz <script type='text/javascript'>var foo = '<<bar>>';</ script>");
 parser.end();
@@ -38,7 +39,7 @@ parser.end();
 Output (simplified):
 
 ```javascript
---> Xyz 
+--> Xyz
 JS! Hooray!
 --> var foo = '<<bar>>';
 That's it?!
@@ -46,12 +47,12 @@ That's it?!
 
 Read more about the parser and it's options in the [wiki](https://github.com/fb55/htmlparser2/wiki/Parser-options).
 
-##Get a DOM
+## Get a DOM
 The `DomHandler` (known as `DefaultHandler` in the original `htmlparser` module) produces a DOM (document object model) that can be manipulated using the [`DomUtils`](https://github.com/fb55/DomUtils) helper.
 
 The `DomHandler`, while still bundled with this module, was moved to its [own module](https://github.com/fb55/domhandler). Have a look at it for further information.
 
-##Parsing RSS/RDF/Atom Feeds
+## Parsing RSS/RDF/Atom Feeds
 
 ```javascript
 new htmlparser.FeedHandler(function(<error> error, <object> feed){
@@ -59,7 +60,7 @@ new htmlparser.FeedHandler(function(<error> error, <object> feed){
 });
 ```
 
-##Performance
+## Performance
 
 After having some artificial benchmarks for some time, __@AndreasMadsen__ published his [`htmlparser-benchmark`](https://github.com/AndreasMadsen/htmlparser-benchmark), which benchmarks HTML parses based on real-world websites.
 
@@ -78,9 +79,31 @@ parse5         : 22.0439 ms/file ± 15.3743
 sax            : 49.6513 ms/file ± 26.6032
 ```
 
-##How is this different from [node-htmlparser](https://github.com/tautologistics/node-htmlparser)?
+## How is this different from [node-htmlparser](https://github.com/tautologistics/node-htmlparser)?
+
 This is a fork of the `htmlparser` module. The main difference is that this is intended to be used only with node (it runs on other platforms using [browserify](https://github.com/substack/node-browserify)). `htmlparser2` was rewritten multiple times and, while it maintains an API that's compatible with `htmlparser` in most cases, the projects don't share any code anymore.
 
 The parser now provides a callback interface close to [sax.js](https://github.com/isaacs/sax-js) (originally targeted at [readabilitySAX](https://github.com/fb55/readabilitysax)). As a result, old handlers won't work anymore.
 
 The `DefaultHandler` and the `RssHandler` were renamed to clarify their purpose (to `DomHandler` and `FeedHandler`). The old names are still available when requiring `htmlparser2`, so your code should work as expected.
+
+## License
+
+Copyright 2010, 2011, Chris Winberry <chris@winberry.net>. All rights reserved.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.

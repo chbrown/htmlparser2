@@ -35,7 +35,6 @@
     "domhandler": "2.3",
     "domutils": "1.5",
     "domelementtype": "1",
-    "readable-stream": "1.1",
     "entities": "1.0"
   },
   "devDependencies": {
@@ -45,9 +44,6 @@
     "istanbul": "*",
     "jscs": "1.5.8",
     "jshint": "2"
-  },
-  "browser": {
-    "readable-stream": false
   },
   "license": "MIT",
   "jshintConfig": {

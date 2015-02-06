@@ -6,6 +6,7 @@
   "keywords": [
     "html",
     "parser",
+    "htmlparser",
     "streams",
     "xml",
     "dom",
